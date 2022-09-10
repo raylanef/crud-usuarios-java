@@ -22,28 +22,23 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity<String> postUser(@RequestBody User newUser){
-        try {
             userRepository.save(newUser);
             return new ResponseEntity<String>("Usuário Cadastrado", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<String>("Deu ruim :(",
-                                                HttpStatus.UNAUTHORIZED);
-        }
+
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> userUpdate(@PathVariable int id,
                                              @RequestBody User user){
-
         user.setId(id);
         userRepository.save(user);
-        return new ResponseEntity<String>("Usuário Atualizado", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Usuário Atualizado", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
-        return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.OK);
     }
 
 }
