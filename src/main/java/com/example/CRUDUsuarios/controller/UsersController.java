@@ -2,6 +2,8 @@ package com.example.CRUDUsuarios.controller;
 
 import com.example.CRUDUsuarios.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.CRUDUsuarios.repository.UserRepository;
 
@@ -19,24 +21,29 @@ public class UsersController {
     }
 
     @PostMapping
-    public User postUser(@RequestBody User newUser){
-        userRepository.save(newUser);
-        return newUser;
+    public ResponseEntity<String> postUser(@RequestBody User newUser){
+        try {
+            userRepository.save(newUser);
+            return new ResponseEntity<String>("Usuário Cadastrado", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Deu ruim :(",
+                                                HttpStatus.UNAUTHORIZED);
+        }
     }
 
-    @PutMapping("/{position}")
-    public User userUpdate(@PathVariable int position,
-                           @RequestBody User user){
+    @PutMapping("/{id}")
+    public ResponseEntity<String> userUpdate(@PathVariable int id,
+                                             @RequestBody User user){
 
-        user.setId(position);
+        user.setId(id);
         userRepository.save(user);
-        return null;
+        return new ResponseEntity<String>("Usuário Atualizado", HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{position}")
-    public String deleteUser(@PathVariable int position) {
-        userRepository.deleteById(position);
-        return "Usuário não encontrado";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        userRepository.deleteById(id);
+        return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.CREATED);
     }
 
 }
