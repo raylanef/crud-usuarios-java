@@ -25,15 +25,6 @@ public class User {
     @Column(name="uf")
     private String state;
 
-    public User(Integer id, String name, Integer age, String cep, String neighborhood, String city, String state) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.cep = cep;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-    }
 
     public User(String name, Integer age, String cep, String neighborhood, String city, String state) {
         this.name = name;
