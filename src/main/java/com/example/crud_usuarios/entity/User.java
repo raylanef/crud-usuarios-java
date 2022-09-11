@@ -1,4 +1,4 @@
-package com.example.CRUDUsuarios.entity;
+package com.example.crud_usuarios.entity;
 
 
 
@@ -24,16 +24,6 @@ public class User {
     private String city;
     @Column(name="uf")
     private String state;
-
-
-    public User(String name, Integer age, String cep, String neighborhood, String city, String state) {
-        this.name = name;
-        this.age = age;
-        this.cep = cep;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-    }
 
     public User() {}
 

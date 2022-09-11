@@ -1,8 +1,7 @@
-package com.example.CRUDUsuarios;
+package com.example.crud_usuarios;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @SpringBootApplication

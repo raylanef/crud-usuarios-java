@@ -1,4 +1,4 @@
-package com.example.CRUDUsuarios;
+package com.example.crud_usuarios;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
