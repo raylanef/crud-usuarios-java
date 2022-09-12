@@ -1,4 +1,4 @@
-# CRUD-Usuarios-Java
+# crud-usuarios-java
 
 Dos criadores de CRUD Usuários, aqui está CRUD Usuarios em Java. Utilizando Spring Boot, Data, JPA.
 
