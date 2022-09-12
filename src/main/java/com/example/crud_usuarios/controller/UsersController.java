@@ -18,12 +18,12 @@ public class UsersController {
     private UsersService usersService;
 
     @GetMapping
-    public List<User> getUsers(){
-       return  usersService.listUsers();
+    public ResponseEntity<List<User>> getUsers(){
+       return ResponseEntity.ok(usersService.listUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<User> getUserById(@PathVariable int id){
         try {
             return ResponseEntity.ok(usersService.getUserById(id));
         } catch (ChangeSetPersister.NotFoundException e){

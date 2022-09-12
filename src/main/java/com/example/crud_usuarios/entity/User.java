@@ -2,6 +2,9 @@ package com.example.crud_usuarios.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,17 +23,21 @@ public class User {
     private String cep;
     @Column(name="bairro")
     private String neighborhood;
+
     @Column(name="localidade")
     private String city;
+
     @Column(name="uf")
     private String state;
 
     public User() {}
 
+    @JsonIgnore
     public void setId(Integer id) {
         this.id = id;
     }
 
+    @JsonProperty
     public Integer getId() {
         return id;
     }
