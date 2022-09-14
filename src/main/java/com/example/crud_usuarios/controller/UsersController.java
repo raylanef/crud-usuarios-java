@@ -1,6 +1,7 @@
 package com.example.crud_usuarios.controller;
 
-import com.example.crud_usuarios.entity.User;
+
+import com.example.crud_usuarios.controller.dtos.UserDto;
 import com.example.crud_usuarios.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -18,30 +19,26 @@ public class UsersController {
     private UsersService usersService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(){
+    public ResponseEntity<List<UserDto>> getUsers(){
        return ResponseEntity.ok(usersService.listUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id){
-        try {
+    public ResponseEntity<UserDto> getUserById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
             return ResponseEntity.ok(usersService.getUserById(id));
-        } catch (ChangeSetPersister.NotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PostMapping
-    public ResponseEntity<String> postUser(@RequestBody User newUser){
-            usersService.add(newUser);
+    public ResponseEntity<String> postUser(@RequestBody UserDto newUserDto){
+            usersService.add(newUserDto);
             return new ResponseEntity<>("Usuário Cadastrado", HttpStatus.CREATED);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> userUpdate(@PathVariable int id,
-                                             @RequestBody User user){
-        usersService.update(id,user);
+                                             @RequestBody UserDto userDto){
+        usersService.update(id, userDto);
         return new ResponseEntity<>("Usuário Atualizado", HttpStatus.OK);
     }
 
@@ -49,6 +46,11 @@ public class UsersController {
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         usersService.delete(id);
         return new ResponseEntity<>("Usuário deletado com sucesso", HttpStatus.OK);
+    }
+
+    @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
+    public ResponseEntity<?> handlerException(){
+        return new ResponseEntity<>("Nenhum usuário encontrado", HttpStatus.NOT_FOUND);
     }
 
 }

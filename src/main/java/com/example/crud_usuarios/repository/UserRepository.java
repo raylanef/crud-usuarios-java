@@ -1,8 +1,8 @@
 package com.example.crud_usuarios.repository;
 
-import com.example.crud_usuarios.entity.User;
+import com.example.crud_usuarios.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Integer> {
-    User findByName(String name);
+public interface UserRepository extends JpaRepository<UserEntity,Integer> {
+    UserEntity findByName(String name);
 }
