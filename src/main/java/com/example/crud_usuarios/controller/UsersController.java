@@ -24,12 +24,8 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable int id){
-        try {
+    public ResponseEntity<UserDto> getUserById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
             return ResponseEntity.ok(usersService.getUserById(id));
-        } catch (ChangeSetPersister.NotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PostMapping
@@ -50,6 +46,11 @@ public class UsersController {
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         usersService.delete(id);
         return new ResponseEntity<>("Usuário deletado com sucesso", HttpStatus.OK);
+    }
+
+    @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
+    public ResponseEntity<?> handlerException(){
+        return new ResponseEntity<>("Nenhum usuário encontrado", HttpStatus.NOT_FOUND);
     }
 
 }
