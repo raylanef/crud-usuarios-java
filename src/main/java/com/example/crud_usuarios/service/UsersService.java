@@ -1,6 +1,5 @@
 package com.example.crud_usuarios.service;
 
-
 import com.example.crud_usuarios.controller.dtos.UserDto;
 import com.example.crud_usuarios.entity.UserEntity;
 import com.example.crud_usuarios.repository.UserRepository;
@@ -17,14 +16,12 @@ public class UsersService {
     private UserRepository userRepository;
 
     public List<UserDto> listUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return toDto(userRepository.findAll());
+
     }
 
     public UserDto getUserById(int id) throws ChangeSetPersister.NotFoundException {
-        UserEntity entity = userRepository.findById(id)
+        var entity = userRepository.findById(id)
                 .orElseThrow(ChangeSetPersister.NotFoundException::new);
         return toDto(entity);
     }
@@ -69,5 +66,9 @@ public class UsersService {
 
         return dto;
 
+    }
+
+    private List<UserDto> toDto(List<UserEntity> entities){
+       return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 }
