@@ -15,7 +15,11 @@ Lembrando...Antes de rodar o projeto, é preciso executar o script cadastro.sql 
 Então, execute o seguinte comando:
 
 ```
-mvn sprint-boot:run
+mvn clean package
+```
+
+```
+docker compose up
 ```
 
 E estará disponivel em : http://localhost:8080/swagger-ui/
