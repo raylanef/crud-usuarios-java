@@ -8,6 +8,8 @@ on:
 jobs:
   EC2-Deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: AWS
 
     steps:
     - uses: actions/checkout@v3
